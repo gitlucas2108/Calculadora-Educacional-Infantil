@@ -1,0 +1,6 @@
+{
+  "name": "Calculadora Infantil Educacional",
+  "description": "Calculadora educacional para estudantes do ensino primário (6 a 10 anos) em Python CustomTkinter com simulador interativo completo.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
