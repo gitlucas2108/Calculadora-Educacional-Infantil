@@ -2,15 +2,12 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { CalculationRecord, DisplayState } from '../types/calculator';
 import { soundEffects } from '../utils/audio';
 import confetti from 'canvas-confetti';
-import { VisualMathAbacus } from './VisualMathAbacus';
 import {
   Volume2,
   VolumeX,
   History,
   Trash2,
   ArrowRight,
-  Eye,
-  EyeOff,
   Sparkles,
   RotateCcw,
   BookOpen
@@ -40,7 +37,6 @@ export const CalculatorSimulator: React.FC = () => {
   const [operadorAtual, setOperadorAtual] = useState<string | null>(null);
   const [historico, setHistorico] = useState<CalculationRecord[]>([]);
   const [historicoAberto, setHistoricoAberto] = useState<boolean>(true);
-  const [mostrarAbaco, setMostrarAbaco] = useState<boolean>(true);
   const [somAtivo, setSomAtivo] = useState<boolean>(true);
   const [ultimoResultado, setUltimoResultado] = useState<string | null>(null);
   const [avisoDivisaoZero, setAvisoDivisaoZero] = useState<boolean>(false);
@@ -354,19 +350,6 @@ export const CalculatorSimulator: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-2">
-          {/* Botão Ábaco */}
-          <button
-            onClick={() => setMostrarAbaco(!mostrarAbaco)}
-            className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-xl border transition-colors ${
-              mostrarAbaco
-                ? 'bg-amber-100/70 border-amber-300 text-amber-900'
-                : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
-            }`}
-          >
-            {mostrarAbaco ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
-            <span>{mostrarAbaco ? 'Ábaco Ativo' : 'Ativar Ábaco'}</span>
-          </button>
-
           {/* Botão Som */}
           <button
             onClick={toggleSom}
@@ -395,16 +378,6 @@ export const CalculatorSimulator: React.FC = () => {
           </button>
         </div>
       </div>
-
-      {/* Ábaco Lúdico (se ativo) */}
-      {mostrarAbaco && (
-        <VisualMathAbacus
-          num1={primeiroOperando}
-          num2={!displayState.resetar_proximo_digito && displayState.valor_atual ? parseFloat(displayState.valor_atual) : null}
-          operador={operadorAtual}
-          resultado={ultimoResultado}
-        />
-      )}
 
       {/* Grid Principal: Calculadora Desktop + Gaveta Lateral de Histórico */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
